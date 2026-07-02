@@ -1,6 +1,7 @@
 from fastapi import FastAPI # type: ignore
 import datetime
 from pydantic import BaseModel # type: ignore
+import ollama # type: ignore
 
 app = FastAPI()
 
@@ -15,8 +16,19 @@ def root():
 @app.post("/chat")
 def chat(msg: Message):
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    respose = ollama.chat(
+        model = "qwen2.5:0.5b",
+        messages = [
+            {
+                "role":"user",
+                "content": msg.content
+            }
+        ]
+    )
+    reply = respose["message"]["content"]
     return {
-        "reply": f"你收到的消息：{msg.content}",
-        "server_time": now,
+        "reply" : reply,
+        "server_time" : now,
         "status": "ok"
     }
+    
