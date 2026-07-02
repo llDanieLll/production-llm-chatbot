@@ -1,57 +1,146 @@
 # Production LLM Chatbot
 
-A production-ready chatbot built using FastAPI, Hugging Face Text Generation Inference (TGI), Docker, and open-source Large Language Models.
+A full-stack AI chatbot built with **FastAPI**, **Ollama**, **Qwen 2.5**, **JavaScript**, and **Docker**. The project demonstrates how a modern LLM application is built from the frontend to the inference backend, with real-time streaming responses.
 
 ---
 
-## Overview
+## Project Overview
 
-This project demonstrates how modern AI applications are built and deployed using an end-to-end inference architecture.
+This project is designed to showcase the architecture of a production-style LLM application rather than simply calling a hosted AI API.
 
-Rather than simply calling an LLM API, the project builds every major component of the serving pipeline.
+The chatbot runs a local open-source language model through Ollama, exposes it with a FastAPI backend, and provides a responsive web interface that streams responses token by token.
 
 ---
 
-## Planned Architecture
+## Features
+
+- Streaming AI responses
+- FastAPI REST backend
+- Local inference using Ollama
+- Qwen 2.5 language model
+- Responsive web interface
+- Professional chat bubble UI
+- Auto-scroll during generation
+- Enter key to send messages
+- Loading state while generating
+- Message timestamps
+- Docker-ready project structure
+
+---
+
+## System Architecture
 
 ```
-Browser
-    │
-HTTP / JSON
-    │
+Browser (HTML / CSS / JavaScript)
+            │
+            │ HTTP POST
+            ▼
 FastAPI Backend
-    │
-HTTP / JSON
-    │
-Text Generation Inference (TGI)
-    │
-Open-source LLM
-    │
-CUDA
-    │
-GPU
+            │
+            │ Ollama Python SDK
+            ▼
+Ollama Server
+            │
+            ▼
+Qwen 2.5
+            │
+            ▼
+Streaming Response
+            │
+            ▼
+Browser
 ```
 
 ---
 
-## Technologies
+## Technology Stack
+
+### Frontend
+
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- Fetch API
+- Streaming (ReadableStream)
+
+### Backend
 
 - FastAPI
-- Hugging Face TGI
-- Docker
-- Open-source LLMs
-- REST API
-- HTTP / JSON
+- Pydantic
+- Ollama Python SDK
+- StreamingResponse
+
+### AI
+
+- Ollama
+- Qwen 2.5
+
+### DevOps
+
+- Docker / OrbStack
+- Git
+- GitHub
+
+---
+
+## Current Capabilities
+
+- Local LLM inference
+- End-to-end streaming responses
+- Modular frontend architecture
+- Professional chat interface
+- REST API communication
+- Cross-Origin Resource Sharing (CORS)
 
 ---
 
 ## Roadmap
 
-- [ ] Deploy TGI
-- [ ] Serve an open-source LLM
-- [ ] Build FastAPI backend
-- [ ] Build chat frontend
-- [ ] Stream responses
+### Completed
+
+- [x] Build FastAPI backend
+- [x] Integrate Ollama
+- [x] Connect Qwen 2.5
+- [x] Build web frontend
+- [x] Implement streaming responses
+- [x] Professional chat layout
+- [x] Message timestamps
+- [x] Docker development environment
+- [x] GitHub project setup
+
+### In Progress
+
+- [ ] Markdown rendering
+- [ ] Syntax highlighting
+- [ ] Copy response button
+- [ ] Typing indicator
+- [ ] Conversation memory
+
+### Planned
+
 - [ ] Docker Compose deployment
-- [ ] Logging and monitoring
+- [ ] Environment configuration (.env)
+- [ ] Structured logging
+- [ ] Model selector
+- [ ] Hugging Face Text Generation Inference (TGI)
 - [ ] Production deployment
+
+---
+
+## Learning Objectives
+
+This project demonstrates practical experience with:
+
+- LLM application architecture
+- Streaming inference
+- REST API development
+- Frontend and backend integration
+- Local model serving
+- AI application deployment workflows
+- Git-based software development
+
+---
+
+## Future Direction
+
+The long-term goal is to evolve this project from a local chatbot into a production-ready LLM serving platform by replacing the Ollama backend with Hugging Face Text Generation Inference (TGI), adding container orchestration, structured logging, monitoring, and scalable deployment.
