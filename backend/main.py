@@ -3,6 +3,10 @@ from fastapi import FastAPI # type: ignore
 import datetime
 from pydantic import BaseModel # type: ignore
 import ollama # type: ignore
+from fastapi.responses import StreamingResponse
+
+def hello():
+    print("Hello")
 
 app = FastAPI()
 
@@ -22,22 +26,26 @@ def root():
     return {
         "message": "Production LLM Chatbot Backend is running!"
     }
+
 @app.post("/chat")
 def chat(msg: Message):
-    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    respose = ollama.chat(
-        model = "qwen2.5:0.5b",
-        messages = [
+
+    response = ollama.chat(
+        model="qwen2.5:0.5b",
+        messages=[
             {
-                "role":"user",
+                "role": "user",
                 "content": msg.content
             }
-        ]
+        ],
+        stream=True
     )
-    reply = respose["message"]["content"]
-    return {
-        "reply" : reply,
-        "server_time" : now,
-        "status": "ok"
-    }
-    
+
+    def generate():
+        for chunk in response:
+            yield chunk["message"]["content"]
+    return StreamingResponse(
+        generate(),
+        media_type="text/plain"
+
+    )    
