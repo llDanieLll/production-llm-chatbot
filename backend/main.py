@@ -1,9 +1,18 @@
+from fastapi.middleware.cors import CORSMiddleware # type: ignore
 from fastapi import FastAPI # type: ignore
 import datetime
 from pydantic import BaseModel # type: ignore
 import ollama # type: ignore
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 class Message(BaseModel):
     content: str
